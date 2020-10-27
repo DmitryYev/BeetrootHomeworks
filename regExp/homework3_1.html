@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*  Начальные 3 цифры в каждом номере - это код оператора
+ Сделать вывод  в консоль таким
+(063) 111 1234
+(333) 456 8768
+(444) 657 5547
+*/
+        let str = `063-111-1234
+                  (333) 456-8768
+                  4446575547`;
+
+        let outputStr = str.replace(/\D/g, '');
+        outputStr = outputStr.replace(/(\d{3})(\d{3})(\d{4})/g, '($1) $2 $3\n');
+        console.log(outputStr);
+        
+    </script>
+</body>
+
+</html>
