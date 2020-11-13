@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@16.8.6/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  <script type="text/babel">
+
+    const root = document.getElementById("root");
+
+    async function getUsers(callback, url) {
+      const response = await fetch(url);
+      const users = await response.json();
+      callback(users);
+    };
+
+
+    function UserList() {
+
+      const [users, setUsers] = React.useState([]);
+      const [searchStr, setSearchStr] = React.useState('');
+      const url = 'https://jsonplaceholder.typicode.com/users'
+
+      getUsers(setUsers, url);
+
+      const handleChange = event => {
+        setSearchStr(event.target.value);
+      }      
+
+      return (
+        <div>
+          <Filter onChange={handleChange} />
+          {users
+            .filter(user => user.name.toLowerCase().includes(searchStr.toLowerCase()))
+            .map(user => <User key={user.id} user={user} />)}
+        </div>
+      );
+    }
+
+    function User(props) {
+      const { user } = props;
+
+      return (
+        <div>
+          <div><b>{user.name}</b></div>
+          <div>Username: {user.username}</div>
+          <div>Email: {user.email}</div>
+          <hr/>
+        </div>
+      );
+    }
+
+    User.propTypes = {
+      user: PropTypes.object
+    }
+
+    function Filter(props) {
+      return (
+        <input type="text" onChange={props.onChange} />
+      );
+    }
+
+    Filter.propTypes = {
+      onChange: PropTypes.func
+    }
+
+    function App() {
+      return (
+        <div>
+          <UserList />
+        </div>
+      );
+    }
+
+
+    ReactDOM.render(<App />, root);
+  </script>
+</body>
+
+</html>
