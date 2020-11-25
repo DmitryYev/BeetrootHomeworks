@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Description = ({ handler, description }) => {
+const DescriptionSwitcher = ({ handler, description }) => {
 
     return (
         <div onClick={handler}>
@@ -10,9 +10,9 @@ const Description = ({ handler, description }) => {
     )
 }
 
-Description.propTypes = {
+DescriptionSwitcher.propTypes = {
     description: PropTypes.bool.isRequired,
     handler: PropTypes.func.isRequired
 }
 
-export default Description;
+export default DescriptionSwitcher;

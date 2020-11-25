@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from 'prop-types'
 import Featured from './Featured'
-import Description from './Description'
+import DescriptionSwitcher from './DescriptionSwitcher'
 
 
 const styles = {
@@ -46,7 +46,7 @@ const FilmCard = ({ film }) => {
                         {film?.duration} min
                 </span>
                 </div>
-                <Description handler={descriptionHandler} description={showDescription} />
+                <DescriptionSwitcher handler={descriptionHandler} description={showDescription} />
             </div>
         </div>
     )
