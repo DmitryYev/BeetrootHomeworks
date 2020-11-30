@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import PropTypes from 'prop-types'
 import Featured from './Featured'
-import DescriptionSwitcher from './DescriptionSwitcher'
 
 
 const styles = {
@@ -46,7 +45,9 @@ const FilmCard = ({ film }) => {
                         {film?.duration} min
                 </span>
                 </div>
-                <DescriptionSwitcher handler={descriptionHandler} description={showDescription} />
+                <div onClick={descriptionHandler}>
+                    {showDescription ? <i className="icon link eye  slash" /> : <i className="icon link eye" />}
+                </div>
             </div>
         </div>
     )
