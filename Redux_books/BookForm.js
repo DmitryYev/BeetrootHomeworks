@@ -6,11 +6,11 @@ import { mapToArr } from "../../utils"
 import { Redirect } from 'react-router-dom'
 import { addBookAction, editBookAction } from '../../ac/booksAction'
 
-const BookForm = ({ match, categories, books, addBookAction, editBookAction }) => {
+const BookForm = ({ bookId, categories, books, addBookAction, editBookAction }) => {
     const [redirect, setRedirect] = useState(false)
     const { register, handleSubmit, errors, control, setError, getValues } = useForm()
     const options = [{ value: '-1', label: 'Choose category' }]
-    const bookForEdit = match.params.id ? books.filter(book => book._id === match.params.id)[0] : null
+    const bookForEdit = bookId ? books.filter(book => book._id === bookId)[0] : null
     categories.map(cat => options.push({ value: cat._id, label: cat.title }))
 
     function onSubmit(data, e) {
@@ -83,13 +83,13 @@ const BookForm = ({ match, categories, books, addBookAction, editBookAction }) =
     )
 }
 
-function mapStateToProps(state) {
-
+function mapStateToProps(state, ownProps) {
     const { categories } = state.categoriesBooks
 
     return {
         categories: mapToArr(categories),
-        books: state.books
+        books: state.books,
+        bookId: ownProps.match.params.id
     }
 }
 
