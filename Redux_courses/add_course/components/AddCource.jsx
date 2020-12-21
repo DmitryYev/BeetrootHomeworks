@@ -20,7 +20,7 @@ const AddCourse = ({createAuthorAction, createCourseAction, authors }) => {
             outputData = {
                 title: data.title,
                 slug: data.title.trim().replace(/\s/g, '-'),
-                authorId: author[0].id,
+                authorId: author.id,
                 category: data.category
             }
             createCourseAction(outputData)
@@ -42,7 +42,7 @@ const AddCourse = ({createAuthorAction, createCourseAction, authors }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='mt-3 col-md-5'>
-            { redirect && <Redirect to='/' />}
+            { redirect && <Redirect to='/courses' />}
             <div className='mt-1 form-group'>
                 <label htmlFor="title">Course title</label>
                 <input
